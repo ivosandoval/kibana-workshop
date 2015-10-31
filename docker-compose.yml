@@ -1,0 +1,27 @@
+elasticsearch:
+  build: elasticsearch
+  ports:
+    - "19200:9200"
+  environment:
+    - ES_HEAP_SIZE=256m
+
+kibana:
+  image: marclop/alpine-kibana:4.1
+  command: /opt/kibana/bin/kibana
+  ports:
+    - "5601:5601"
+  links:
+    - elasticsearch
+
+toolbox:
+  #image: alpine:3.2
+  build: toolbox
+  command: "/tmp/entrypoint.sh"
+  volumes:
+    - ./elasticsearch:/tmp/elasticsearch
+    - "./toolbox/entrypoint.sh:/tmp/entrypoint.sh"
+    - "./environment.yml:tmp/environment.yml"
+  links:
+    - elasticsearch
+  #env_file:
+  #  - ./elasticsearch/oauth.env

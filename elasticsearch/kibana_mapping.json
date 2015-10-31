@@ -1,0 +1,37 @@
+{
+  "index": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "config": {
+      "properties": {
+        "buildNum": {
+          "type": "long"
+        },
+        "defaultIndex": {
+          "type": "string"
+        }
+      }
+    },
+    "index-pattern": {
+      "properties": {
+        "fieldFormatMap": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        },
+        "intervalName": {
+          "type": "string"
+        },
+        "timeFieldName": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
