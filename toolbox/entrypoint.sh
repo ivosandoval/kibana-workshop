@@ -35,6 +35,7 @@ RIVER_FILE="/tmp/elasticsearch/river.json"
 TWITTER_FILE="/tmp/elasticsearch/mapping.json"
 KIBANA_FILE="/tmp/elasticsearch/kibana_mapping.json"
 KIBANA_CONFIG="/tmp/elasticsearch/kibana_config.json"
+KIBANA_CONTENT="/tmp/elasticsearch/content.json"
 
 cp "/tmp/elasticsearch/river.json.tpl" "${RIVER_FILE}"
 
@@ -50,18 +51,23 @@ while ! checkPortAvailable elasticsearch 9200; do
 done
 
 curl -s -XPUT -H "Content-Type: application/json" --data @${TWITTER_FILE} \
-http://elasticsearch:9200/twitter/
+http://elasticsearch:9200/twitter/; echo
 
 curl -s -XPUT -H "Content-Type: application/json" --data @${KIBANA_FILE} \
-http://elasticsearch:9200/.kibana/
+http://elasticsearch:9200/.kibana/; echo
 
 curl -s -XPOST -H "Content-Type: application/json" --data @${KIBANA_CONFIG} \
-http://elasticsearch:9200/.kibana/config/4.1.0
+http://elasticsearch:9200/.kibana/config/4.1.0; echo
 
 curl -s -XPOST http://elasticsearch:9200/.kibana/index-pattern/twitter -d '{
 	"title": "twitter",
 	"timeFieldName": "created_at"
-}'
+}'; echo
 
 curl -s -H "Content-Type: application/json" --data @${RIVER_FILE} \
-http://elasticsearch:9200/_river/twitter/_meta
+http://elasticsearch:9200/_river/twitter/_meta; echo
+
+sleep 25
+
+# Bulk content import
+curl -s -XPOST http://elasticsearch:9200/_bulk --data-binary @${KIBANA_CONTENT}; echo

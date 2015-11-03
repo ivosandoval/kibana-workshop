@@ -7,6 +7,12 @@ all: dev logs
 dev:
 	@docker-compose -p ${COMPONENT} -f docker-compose.yml up -d
 
+kill:
+	@docker-compose -p ${COMPONENT} -f docker-compose.yml kill
+
+load:
+	@curl -XPOST dev.wellhello.com:19200/_bulk --data-binary @elasticsearch/content.json; echo
+
 nodev:
 	@docker-compose -p ${COMPONENT} -f docker-compose.yml kill
 	@docker-compose -p ${COMPONENT} -f docker-compose.yml rm -f
