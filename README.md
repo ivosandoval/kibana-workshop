@@ -106,19 +106,29 @@ kibanaworkshop_toolbox_1 exited with code 0
 
 After all that gibberish is gone, expect the command to close, as the container `toolbox` will be a short lived one.
 
-## Viewing logs
+## Viewing Kibana data
+
+Point your browser to `<docker-ip>:5601/` and you'll see Kibana loading up with a few dashboards included for what u paid :metal:
+
+## Accessing Elasticserach
+
+Elasticsearch is available at `http://<docker-ip>:19200/`
+
+## Other commands
+
+### Viewing logs
 
 ```bash
 make logs
 ```
 
-## Stopping it
+### Stopping it
 
 ```bash
 make kill
 ```
 
-## Removing everything
+### Removing everything
 
 It will also stop the environment if its running
 
