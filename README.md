@@ -108,7 +108,7 @@ After all that gibberish is gone, expect the command to close, as the container 
 
 ## Viewing Kibana data
 
-Point your browser to `<docker-ip>:5601/` and you'll see Kibana loading up with a few dashboards included for what u paid :metal:
+Point your browser to `http://<docker-ip>:5601/` and you'll see Kibana loading up with a few dashboards included for what u paid :metal:
 
 ## Accessing Elasticserach
 
